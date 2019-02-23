@@ -33,21 +33,21 @@ void LED_CONTROL(unsigned char pattern)
 	if( pattern == 0 )
 		LED_ALL_OFF();
 	if( ( pattern & 0b0001 ) == 0b0001 )
-		HAL_GPIO_WritePin( LED1_GPIO_Port , LED1_Pin , GPIO_PIN_RESET );
-	else
 		HAL_GPIO_WritePin( LED1_GPIO_Port , LED1_Pin , GPIO_PIN_SET );
+	else
+		HAL_GPIO_WritePin( LED1_GPIO_Port , LED1_Pin , GPIO_PIN_RESET );
 	if( ( pattern & 0b0010 ) == 0b0010 )
-		HAL_GPIO_WritePin( LED2_GPIO_Port , LED2_Pin , GPIO_PIN_RESET );
-	else
 		HAL_GPIO_WritePin( LED2_GPIO_Port , LED2_Pin , GPIO_PIN_SET );
+	else
+		HAL_GPIO_WritePin( LED2_GPIO_Port , LED2_Pin , GPIO_PIN_RESET );
 	if( ( pattern & 0b0100 ) == 0b01000 )
-		HAL_GPIO_WritePin( LED3_GPIO_Port , LED3_Pin , GPIO_PIN_RESET );
-	else
 		HAL_GPIO_WritePin( LED3_GPIO_Port , LED3_Pin , GPIO_PIN_SET );
-	if( ( pattern & 0b1000 ) == 0b1000 )
-		HAL_GPIO_WritePin( LED4_GPIO_Port , LED4_Pin , GPIO_PIN_RESET );
 	else
+		HAL_GPIO_WritePin( LED3_GPIO_Port , LED3_Pin , GPIO_PIN_RESET );
+	if( ( pattern & 0b1000 ) == 0b1000 )
 		HAL_GPIO_WritePin( LED4_GPIO_Port , LED4_Pin , GPIO_PIN_SET );
+	else
+		HAL_GPIO_WritePin( LED4_GPIO_Port , LED4_Pin , GPIO_PIN_RESET );
 }
 
 void LED_FLICK(void)

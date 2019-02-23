@@ -8,6 +8,8 @@
 #ifndef MOTION_H_
 #define MOTION_H_
 
-void MOTION_STRAIGHT(void);
+void MOTION_ENABLE(void);
+void MOTION_DISABLE(void);
+void MOTION_STRAIGHT(int left,int right);
 
 #endif /* MOTION_H_ */

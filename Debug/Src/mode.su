@@ -1,1 +1,2 @@
-mode.c:15:6:LED_EMIT	8	static
+mode.c:17:8:MODE_SELECT	8	static
+mode.c:60:6:MODE_RUN	8	static

@@ -13,13 +13,10 @@
 #include "led.h"
 #include "motion.h"
 
-TIM_HandleTypeDef htim2;
-TIM_HandleTypeDef htim8;
 TIM_OC_InitTypeDef sConfigOC;
 
-void MOTION_STRAIGHT(void)
+void MOTION_ENABLE(void)
 {
-	  htim2.Init.Prescaler = 8000;
 	  sConfigOC.OCMode = TIM_OCMODE_PWM1;
 	  sConfigOC.Pulse = 1;
 	  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
@@ -29,17 +26,103 @@ void MOTION_STRAIGHT(void)
 	    _Error_Handler(__FILE__, __LINE__);
 	  }
 
-	  htim5.Init.Prescaler = 8000;
 	  sConfigOC.OCMode = TIM_OCMODE_PWM1;
 	  sConfigOC.Pulse = 1;
 	  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
 	  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-	  if (HAL_TIM_PWM_ConfigChannel(&htim5, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
+	  if (HAL_TIM_PWM_ConfigChannel(&htim8, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
 	  {
 	    _Error_Handler(__FILE__, __LINE__);
 	  }
 
-    HAL_GPIO_WritePin( MOTER_EN_GPIO_Port , MOTER_EN_Pin , GPIO_PIN_SET );
-    HAL_GPIO_WritePin( R_CW_CCW_GPIO_Port , R_CW_CCW_Pin , GPIO_PIN_SET );
-    HAL_GPIO_WritePin( L_CW_CCW_GPIO_Port , L_CW_CCW_Pin , GPIO_PIN_SET );
+	  if( HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3) != HAL_OK)
+	  {
+	    _Error_Handler(__FILE__, __LINE__);
+	  }
+	  if( HAL_TIM_PWM_Start(&htim8,TIM_CHANNEL_4) != HAL_OK)
+	  {
+	    _Error_Handler(__FILE__, __LINE__);
+	  }
+
+      HAL_GPIO_WritePin(MOTER_EN_GPIO_Port,MOTER_EN_Pin,GPIO_PIN_SET);
+}
+
+void MOTION_DISABLE(void)
+{
+	  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	  sConfigOC.Pulse = 0;
+	  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+	  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
+	  {
+	    _Error_Handler(__FILE__, __LINE__);
+	  }
+
+	  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	  sConfigOC.Pulse = 0;
+	  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+	  if (HAL_TIM_PWM_ConfigChannel(&htim8, &sConfigOC, TIM_CHANNEL_4) != HAL_OK)
+	  {
+	    _Error_Handler(__FILE__, __LINE__);
+	  }
+
+	  if( HAL_TIM_PWM_Stop(&htim2,TIM_CHANNEL_3) != HAL_OK)
+	  {
+	    _Error_Handler(__FILE__, __LINE__);
+	  }
+	  if( HAL_TIM_PWM_Stop(&htim8,TIM_CHANNEL_4) != HAL_OK)
+	  {
+	    _Error_Handler(__FILE__, __LINE__);
+	  }
+
+	  htim2.Init.Prescaler = 0;
+	  if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
+	  {
+	  	  _Error_Handler(__FILE__, __LINE__);
+	  }
+
+	  htim8.Init.Prescaler = 0;
+	  if (HAL_TIM_PWM_Init(&htim8) != HAL_OK)
+	  {
+		  _Error_Handler(__FILE__, __LINE__);
+	  }
+
+      HAL_GPIO_WritePin(MOTER_EN_GPIO_Port,MOTER_EN_Pin,GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(L_CW_CCW_GPIO_Port,L_CW_CCW_Pin,GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(R_CW_CCW_GPIO_Port,R_CW_CCW_Pin,GPIO_PIN_RESET);
+}
+
+void MOTION_STRAIGHT(int left,int right)
+{
+	if(left > 0)
+	{
+		HAL_GPIO_WritePin(L_CW_CCW_GPIO_Port,L_CW_CCW_Pin,GPIO_PIN_SET);
+	}
+	else
+	{
+		HAL_GPIO_WritePin(L_CW_CCW_GPIO_Port,L_CW_CCW_Pin,GPIO_PIN_RESET);
+		left = -1*left;
+	}
+	if(right > 0)
+	{
+		HAL_GPIO_WritePin(R_CW_CCW_GPIO_Port,R_CW_CCW_Pin,GPIO_PIN_SET);
+	}
+	else
+	{
+		HAL_GPIO_WritePin(R_CW_CCW_GPIO_Port,R_CW_CCW_Pin,GPIO_PIN_RESET);
+		right = -1*right;
+	}
+
+	htim2.Init.Prescaler = left;
+	if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
+	{
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	htim8.Init.Prescaler = right;
+	if (HAL_TIM_PWM_Init(&htim8) != HAL_OK)
+	{
+		_Error_Handler(__FILE__, __LINE__);
+	}
 }
