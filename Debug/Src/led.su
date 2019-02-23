@@ -1,0 +1,4 @@
+led.c:15:6:LED_ALL_ON	8	static
+led.c:23:6:LED_ALL_OFF	8	static
+led.c:31:6:LED_CONTROL	8	static
+led.c:53:6:LED_FLICK	8	static
