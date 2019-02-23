@@ -63,9 +63,19 @@ void MODE_RUN(int8_t mode)
 	{
 	case 0:
 		MOTION_ENABLE();
+		MOTION_TORQUE_ON();
+		MOTION_STRAIGHT( 6400 , 6400 );
+		HAL_Delay(1000);
+		MOTION_TORQUE_OFF();
+		MOTION_DISABLE();
 		break;
 	case 1:
-		MOTION_STRAIGHT( 6400 , 6400 );
+		MOTION_ENABLE();
+		MOTION_TORQUE_ON();
+		MOTION_STRAIGHT( -6400 , -6400 );
+		HAL_Delay(1000);
+		MOTION_TORQUE_OFF();
+		MOTION_DISABLE();
 		break;
 	default:
 		break;

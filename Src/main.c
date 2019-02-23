@@ -105,12 +105,6 @@ int main(void)
   MX_TIM8_Init();
   /* USER CODE BEGIN 2 */
 
-  /*MOTION_ENABLE();
-  HAL_Delay( 1000 );
-  MOTION_STRAIGHT( 6400 , 6400 );
-  HAL_Delay( 1000 );
-  MOTION_DISABLE();*/
-
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -121,14 +115,7 @@ int main(void)
 
   /* USER CODE BEGIN 3 */
 	  MODE_RUN( MODE_SELECT() );
-		/*if(HAL_GPIO_ReadPin(SW3_GPIO_Port,SW3_Pin) == GPIO_PIN_SET)
-		{
-			LED_ALL_ON();
-		}
-		if(HAL_GPIO_ReadPin(SW2_GPIO_Port,SW2_Pin) == GPIO_PIN_SET)
-		{
-			LED_ALL_OFF();
-		}*/
+
   }
   /* USER CODE END 3 */
 
