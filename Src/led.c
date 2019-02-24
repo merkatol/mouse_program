@@ -40,7 +40,7 @@ void LED_CONTROL(unsigned char pattern)
 		HAL_GPIO_WritePin( LED2_GPIO_Port , LED2_Pin , GPIO_PIN_SET );
 	else
 		HAL_GPIO_WritePin( LED2_GPIO_Port , LED2_Pin , GPIO_PIN_RESET );
-	if( ( pattern & 0b0100 ) == 0b01000 )
+	if( ( pattern & 0b0100 ) == 0b0100 )
 		HAL_GPIO_WritePin( LED3_GPIO_Port , LED3_Pin , GPIO_PIN_SET );
 	else
 		HAL_GPIO_WritePin( LED3_GPIO_Port , LED3_Pin , GPIO_PIN_RESET );

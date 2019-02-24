@@ -17,7 +17,7 @@
 int8_t MODE_SELECT(void)
 {
 	int mode = 0;
-	int mode_max = 1;
+	int mode_max = 4;
 	LED_CONTROL(mode);
 	HAL_Delay(1000);
 
@@ -33,10 +33,10 @@ int8_t MODE_SELECT(void)
 			{
 				mode ++;
 			}
-			else
+			/*else
 			{
 				mode = 0;
-			}
+			}*/
 		}
 		if(HAL_GPIO_ReadPin(SW2_GPIO_Port,SW2_Pin) == GPIO_PIN_SET)
 		{
@@ -44,16 +44,17 @@ int8_t MODE_SELECT(void)
 			{
 				mode --;
 			}
-			else
+			/*else
 			{
 				mode = mode_max;
-			}
+			}*/
 		}
 		if(HAL_GPIO_ReadPin(SW3_GPIO_Port,SW3_Pin) == GPIO_PIN_SET) break;
 
-		HAL_Delay(200);
+		HAL_Delay(300);
 	}
 
+	HAL_Delay(300);
 	return mode;
 }
 
@@ -61,22 +62,56 @@ void MODE_RUN(int8_t mode)
 {
 	switch(mode)
 	{
+	//ëOêi
 	case 0:
+		HAL_Delay(1000);
 		MOTION_ENABLE();
-		MOTION_TORQUE_ON();
 		MOTION_STRAIGHT( 6400 , 6400 );
 		HAL_Delay(1000);
-		MOTION_TORQUE_OFF();
+		MOTION_PRES_RESET();
+		HAL_Delay(1000);
 		MOTION_DISABLE();
 		break;
+	//å„ëﬁ
 	case 1:
+		HAL_Delay(1000);
 		MOTION_ENABLE();
-		MOTION_TORQUE_ON();
 		MOTION_STRAIGHT( -6400 , -6400 );
 		HAL_Delay(1000);
-		MOTION_TORQUE_OFF();
+		MOTION_PRES_RESET();
+		HAL_Delay(1000);
 		MOTION_DISABLE();
 		break;
+	//90ìxâEâÒì]
+	case 2:
+		HAL_Delay(1000);
+		MOTION_ENABLE();
+		for(int i = 0 ; i < 4 ; i ++)
+		{
+			MOTION_TURN_RIGHT();
+			HAL_Delay(1000);
+		}
+		MOTION_DISABLE();
+	//90ìxç∂âÒì]
+	case 3:
+		HAL_Delay(1000);
+		MOTION_ENABLE();
+		for(int i = 0 ; i < 4 ; i ++)
+		{
+			MOTION_TURN_LEFT();
+			HAL_Delay(1000);
+		}
+		MOTION_DISABLE();
+	//180ìxâÒì]
+	case 4:
+		HAL_Delay(1000);
+		MOTION_ENABLE();
+		for(int i = 0 ; i < 2 ; i ++)
+		{
+			MOTION_U_TURN();
+			HAL_Delay(1000);
+		}
+		MOTION_DISABLE();
 	default:
 		break;
 	}

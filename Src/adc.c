@@ -38,11 +38,20 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
+#include "main.h"
+#include "stm32f1xx_hal.h"
+#include "adc.h"
+#include "tim.h"
+#include "gpio.h"
+#include "motion.h"
+#include "led.h"
+#include "mode.h"
 #include "adc.h"
 
-#include "gpio.h"
-
 /* USER CODE BEGIN 0 */
+
+uint16_t adc1_ch10 = 10;
+uint16_t adc1_ch11 = 10;
 
 /* USER CODE END 0 */
 
@@ -134,6 +143,28 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
 
 /* USER CODE BEGIN 1 */
 
+void ADC_UPDATE(void)
+{
+	ADC_ChannelConfTypeDef sConfig;
+
+	sConfig.Rank = 1;
+	sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+	sConfig.Channel = ADC_CHANNEL_10;
+	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+	HAL_ADC_Start(&hadc1);
+	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
+	adc1_ch10 = HAL_ADC_GetValue(&hadc1);
+
+	sConfig.Rank = 2;
+	sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+	sConfig.Channel = ADC_CHANNEL_11;
+	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+	HAL_ADC_Start(&hadc1);
+	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
+	adc1_ch11 = HAL_ADC_GetValue(&hadc1);
+
+	printf("%d\r",adc1_ch10);
+}
 /* USER CODE END 1 */
 
 /**

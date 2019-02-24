@@ -45,6 +45,7 @@
 #include "motion.h"
 #include "led.h"
 #include "mode.h"
+#include "adc.h"
 
 /* USER CODE BEGIN Includes */
 
@@ -114,8 +115,9 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-	  MODE_RUN( MODE_SELECT() );
 
+	  //MODE_RUN( MODE_SELECT() );
+	  ADC_UPDATE();
   }
   /* USER CODE END 3 */
 

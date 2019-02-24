@@ -43,6 +43,8 @@ void MOTION_ENABLE(void)
 	  {
 	    _Error_Handler(__FILE__, __LINE__);
 	  }
+
+	  HAL_GPIO_WritePin(MOTER_EN_GPIO_Port,MOTER_EN_Pin,GPIO_PIN_SET);
 }
 
 void MOTION_DISABLE(void)
@@ -73,14 +75,25 @@ void MOTION_DISABLE(void)
 	  {
 	    _Error_Handler(__FILE__, __LINE__);
 	  }
+
+	  htim2.Init.Prescaler = 0;
+	  if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
+	  {
+		    _Error_Handler(__FILE__, __LINE__);
+	  }
+
+	  htim8.Init.Prescaler = 0;
+	  if (HAL_TIM_PWM_Init(&htim8) != HAL_OK)
+	  {
+		  _Error_Handler(__FILE__, __LINE__);
+	  }
+
+	  HAL_GPIO_WritePin(MOTER_EN_GPIO_Port,MOTER_EN_Pin,GPIO_PIN_RESET);
+	  HAL_GPIO_WritePin(L_CW_CCW_GPIO_Port,L_CW_CCW_Pin,GPIO_PIN_RESET);
+	  HAL_GPIO_WritePin(R_CW_CCW_GPIO_Port,R_CW_CCW_Pin,GPIO_PIN_RESET);
 }
 
-void MOTION_TORQUE_ON(void)
-{
-	HAL_GPIO_WritePin(MOTER_EN_GPIO_Port,MOTER_EN_Pin,GPIO_PIN_SET);
-}
-
-void MOTION_TORQUE_OFF(void)
+void MOTION_PRES_RESET(void)
 {
 	htim2.Init.Prescaler = 0;
 	if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
@@ -93,10 +106,6 @@ void MOTION_TORQUE_OFF(void)
 	{
 		_Error_Handler(__FILE__, __LINE__);
 	}
-
-    HAL_GPIO_WritePin(MOTER_EN_GPIO_Port,MOTER_EN_Pin,GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(L_CW_CCW_GPIO_Port,L_CW_CCW_Pin,GPIO_PIN_RESET);
-    HAL_GPIO_WritePin(R_CW_CCW_GPIO_Port,R_CW_CCW_Pin,GPIO_PIN_RESET);
 }
 
 void MOTION_STRAIGHT(int left,int right)
@@ -131,4 +140,70 @@ void MOTION_STRAIGHT(int left,int right)
 	{
 		_Error_Handler(__FILE__, __LINE__);
 	}
+}
+
+void MOTION_TURN_RIGHT(void)
+{
+	MOTION_PRES_RESET();
+
+	HAL_GPIO_WritePin(L_CW_CCW_GPIO_Port,L_CW_CCW_Pin,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(R_CW_CCW_GPIO_Port,R_CW_CCW_Pin,GPIO_PIN_SET);
+	htim2.Init.Prescaler = 8000;
+	if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
+	{
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	htim8.Init.Prescaler = 8000;
+	if (HAL_TIM_PWM_Init(&htim8) != HAL_OK)
+	{
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	HAL_Delay(268);
+	MOTION_PRES_RESET();
+}
+
+void MOTION_TURN_LEFT(void)
+{
+	MOTION_PRES_RESET();
+
+	HAL_GPIO_WritePin(L_CW_CCW_GPIO_Port,L_CW_CCW_Pin,GPIO_PIN_RESET);
+	HAL_GPIO_WritePin(R_CW_CCW_GPIO_Port,R_CW_CCW_Pin,GPIO_PIN_RESET);
+	htim2.Init.Prescaler = 8000;
+	if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
+	{
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	htim8.Init.Prescaler = 8000;
+	if (HAL_TIM_PWM_Init(&htim8) != HAL_OK)
+	{
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	HAL_Delay(268);
+	MOTION_PRES_RESET();
+}
+
+void MOTION_U_TURN(void)
+{
+	MOTION_PRES_RESET();
+
+	HAL_GPIO_WritePin(L_CW_CCW_GPIO_Port,L_CW_CCW_Pin,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(R_CW_CCW_GPIO_Port,R_CW_CCW_Pin,GPIO_PIN_SET);
+	htim2.Init.Prescaler = 8000;
+	if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
+	{
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	htim8.Init.Prescaler = 8000;
+	if (HAL_TIM_PWM_Init(&htim8) != HAL_OK)
+	{
+		_Error_Handler(__FILE__, __LINE__);
+	}
+
+	HAL_Delay(536);
+	MOTION_PRES_RESET();
 }
