@@ -42,11 +42,11 @@
 #include "stm32f1xx_hal.h"
 #include "adc.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 #include "motion.h"
 #include "led.h"
 #include "mode.h"
-#include "adc.h"
 
 /* USER CODE BEGIN 0 */
 
@@ -163,7 +163,11 @@ void ADC_UPDATE(void)
 	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
 	adc1_ch11 = HAL_ADC_GetValue(&hadc1);
 
-	printf("%d\r",adc1_ch10);
+	/*if(adc1_ch10 != 10)
+	{
+		LED_ALL_OFF();
+	}
+	printf("%d\r",adc1_ch10);*/
 }
 /* USER CODE END 1 */
 
