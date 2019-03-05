@@ -37,6 +37,12 @@
 
 /* USER CODE BEGIN 0 */
 
+ADC_HandleTypeDef hadc1;
+uint16_t adc1_ch10 = 10;
+uint16_t adc1_ch11 = 10;
+uint16_t adc1_ch12 = 10;
+uint16_t adc1_ch13 = 10;
+
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
@@ -180,6 +186,46 @@ void SysTick_Handler(void)
   HAL_IncTick();
   HAL_SYSTICK_IRQHandler();
   /* USER CODE BEGIN SysTick_IRQn 1 */
+
+	ADC_ChannelConfTypeDef sConfig;
+
+	sConfig.Rank = ADC_REGULAR_RANK_1;
+	sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
+	sConfig.Channel = ADC_CHANNEL_10;
+	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+	HAL_ADC_Start(&hadc1);
+	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
+	adc1_ch10 = HAL_ADC_GetValue(&hadc1);
+	HAL_ADC_Stop(&hadc1);
+
+	sConfig.Rank = ADC_REGULAR_RANK_2;
+	sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
+	sConfig.Channel = ADC_CHANNEL_11;
+	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+	HAL_ADC_Start(&hadc1);
+	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
+	adc1_ch11 = HAL_ADC_GetValue(&hadc1);
+	HAL_ADC_Stop(&hadc1);
+
+	sConfig.Rank = ADC_REGULAR_RANK_3;
+	sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
+	sConfig.Channel = ADC_CHANNEL_12;
+	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+	HAL_ADC_Start(&hadc1);
+	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
+	adc1_ch12 = HAL_ADC_GetValue(&hadc1);
+	HAL_ADC_Stop(&hadc1);
+
+	sConfig.Rank = ADC_REGULAR_RANK_4;
+	sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
+	sConfig.Channel = ADC_CHANNEL_13;
+	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+	HAL_ADC_Start(&hadc1);
+	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
+	adc1_ch13 = HAL_ADC_GetValue(&hadc1);
+	HAL_ADC_Stop(&hadc1);
+
+	printf(" %d %d %d %d\r",adc1_ch10,adc1_ch11,adc1_ch12,adc1_ch13);
 
   /* USER CODE END SysTick_IRQn 1 */
 }

@@ -43,9 +43,10 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
-#include "motion.h"
 #include "led.h"
+#include "motion.h"
 #include "mode.h"
+#include "global.h"
 
 /* USER CODE BEGIN Includes */
 
@@ -60,9 +61,7 @@
 #else
 #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
 #endif /* __GNUC__ */
-void __io_putchar(uint8_t ch){
-	HAL_UART_Transmit(&huart1, &ch, 1, 1);
-}
+
 
 /* Private variables ---------------------------------------------------------*/
 
@@ -117,8 +116,13 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
-  //HAL_TIM_Base_Start_IT(&htim4);
+  HAL_TIM_Base_Start_IT(&htim4);
   setbuf(stdout, NULL);
+
+	HAL_GPIO_WritePin(SENSOR1_GPIO_Port,SENSOR1_Pin,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(SENSOR2_GPIO_Port,SENSOR2_Pin,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(SENSOR3_GPIO_Port,SENSOR3_Pin,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(SENSOR4_GPIO_Port,SENSOR4_Pin,GPIO_PIN_SET);
 
   /* USER CODE END 2 */
 
@@ -130,9 +134,9 @@ int main(void)
 
   /* USER CODE BEGIN 3 */
 
-	  MODE_RUN( MODE_SELECT() );
-	  /*printf("hello");
-	  LED_ALL_ON();
+	  //MODE_RUN( MODE_SELECT() );
+	  //printf("hello");
+	  /*LED_ALL_ON();
 	  ADC_UPDATE();*/
   }
   /* USER CODE END 3 */

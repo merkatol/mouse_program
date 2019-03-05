@@ -9,10 +9,12 @@
 #include "stm32f1xx_hal.h"
 #include "adc.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
-#include "motion.h"
 #include "led.h"
+#include "motion.h"
 #include "mode.h"
+#include "global.h"
 
 int8_t MODE_SELECT(void)
 {
