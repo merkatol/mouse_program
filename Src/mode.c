@@ -53,10 +53,10 @@ int8_t MODE_SELECT(void)
 		}
 		if(HAL_GPIO_ReadPin(SW3_GPIO_Port,SW3_Pin) == GPIO_PIN_SET) break;
 
-		HAL_Delay(300);
+		HAL_Delay(500);
 	}
 
-	HAL_Delay(300);
+	HAL_Delay(500);
 	return mode;
 }
 
@@ -69,51 +69,41 @@ void MODE_RUN(int8_t mode)
 		HAL_Delay(1000);
 		MOTION_ENABLE();
 		MOTION_STRAIGHT( 6400 , 6400 );
-		HAL_Delay(1000);
-		MOTION_PRES_RESET();
-		HAL_Delay(1000);
 		MOTION_DISABLE();
+		HAL_Delay(1000);
+		HAL_GPIO_WritePin(MOTER_EN_GPIO_Port,MOTER_EN_Pin,GPIO_PIN_RESET);
 		break;
-	//å„ëﬁ
+	//90ìxâEâÒì]
 	case 1:
 		HAL_Delay(1000);
 		MOTION_ENABLE();
-		MOTION_STRAIGHT( -6400 , -6400 );
-		HAL_Delay(1000);
-		MOTION_PRES_RESET();
-		HAL_Delay(1000);
+		MOTION_TURN_RIGHT();
 		MOTION_DISABLE();
+		HAL_Delay(1000);
+		HAL_GPIO_WritePin(MOTER_EN_GPIO_Port,MOTER_EN_Pin,GPIO_PIN_RESET);
 		break;
-	//90ìxâEâÒì]
+	//90ìxç∂âÒì]
 	case 2:
 		HAL_Delay(1000);
 		MOTION_ENABLE();
-		for(int i = 0 ; i < 4 ; i ++)
-		{
-			MOTION_TURN_RIGHT();
-			HAL_Delay(1000);
-		}
+		MOTION_TURN_LEFT();
 		MOTION_DISABLE();
-	//90ìxç∂âÒì]
+		HAL_Delay(1000);
+		HAL_GPIO_WritePin(MOTER_EN_GPIO_Port,MOTER_EN_Pin,GPIO_PIN_RESET);
+		break;
+	//180ìxâÒì]
 	case 3:
 		HAL_Delay(1000);
 		MOTION_ENABLE();
-		for(int i = 0 ; i < 4 ; i ++)
-		{
-			MOTION_TURN_LEFT();
-			HAL_Delay(1000);
-		}
+		MOTION_TURN_LEFT();
 		MOTION_DISABLE();
-	//180ìxâÒì]
-	case 4:
 		HAL_Delay(1000);
-		MOTION_ENABLE();
-		for(int i = 0 ; i < 2 ; i ++)
-		{
-			MOTION_U_TURN();
-			HAL_Delay(1000);
-		}
-		MOTION_DISABLE();
+		HAL_GPIO_WritePin(MOTER_EN_GPIO_Port,MOTER_EN_Pin,GPIO_PIN_RESET);
+		break;
+	//ADïœä∑
+	case 4:
+		printf(" fl_%d , sl_%d , sr_%d , fr_%d     \r",sen_fl.value,sen_sl.value,sen_sr.value,sen_fr.value);
+		break;
 	default:
 		break;
 	}

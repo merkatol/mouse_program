@@ -10,7 +10,6 @@
 
 void MOTION_ENABLE(void);
 void MOTION_DISABLE(void);
-void MOTION_PRES_RESET(void);
 void MOTION_STRAIGHT(int left,int right);
 void MOTION_TURN_RIGHT(void);
 void MOTION_TURN_LEFT(void);

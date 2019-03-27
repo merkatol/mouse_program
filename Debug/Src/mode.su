@@ -1,2 +1,2 @@
 mode.c:19:8:MODE_SELECT	8	static
-mode.c:63:6:MODE_RUN	8	static
+mode.c:63:6:MODE_RUN	16	static

@@ -43,12 +43,14 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
+
+/* USER CODE BEGIN Includes */
+
 #include "led.h"
 #include "motion.h"
 #include "mode.h"
 #include "global.h"
-
-/* USER CODE BEGIN Includes */
+#include <stdint.h>
 
 /* USER CODE END Includes */
 
@@ -61,7 +63,9 @@
 #else
 #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
 #endif /* __GNUC__ */
-
+void __io__putchar(uint8_t ch){
+	HAL_UART_Transmit(&huart1,&ch,1,1);
+}
 
 /* Private variables ---------------------------------------------------------*/
 
@@ -69,6 +73,7 @@
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+static void MX_NVIC_Init(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -111,18 +116,17 @@ int main(void)
   MX_ADC1_Init();
   MX_TIM2_Init();
   MX_TIM4_Init();
-  MX_TIM5_Init();
-  MX_TIM8_Init();
   MX_USART1_UART_Init();
+  MX_TIM5_Init();
+  MX_ADC2_Init();
+  MX_TIM3_Init();
+
+  /* Initialize interrupts */
+  MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_TIM_Base_Start_IT(&htim4);
+  HAL_TIM_Base_Start_IT(&htim2);
   setbuf(stdout, NULL);
-
-	HAL_GPIO_WritePin(SENSOR1_GPIO_Port,SENSOR1_Pin,GPIO_PIN_SET);
-	HAL_GPIO_WritePin(SENSOR2_GPIO_Port,SENSOR2_Pin,GPIO_PIN_SET);
-	HAL_GPIO_WritePin(SENSOR3_GPIO_Port,SENSOR3_Pin,GPIO_PIN_SET);
-	HAL_GPIO_WritePin(SENSOR4_GPIO_Port,SENSOR4_Pin,GPIO_PIN_SET);
 
   /* USER CODE END 2 */
 
@@ -134,10 +138,9 @@ int main(void)
 
   /* USER CODE BEGIN 3 */
 
-	  //MODE_RUN( MODE_SELECT() );
-	  //printf("hello");
-	  /*LED_ALL_ON();
-	  ADC_UPDATE();*/
+	 MODE_RUN( MODE_SELECT() );
+	 //printf("%d\r",moter.step_l);
+
   }
   /* USER CODE END 3 */
 
@@ -200,7 +203,26 @@ void SystemClock_Config(void)
   HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
 
+/**
+  * @brief NVIC Configuration.
+  * @retval None
+  */
+static void MX_NVIC_Init(void)
+{
+  /* TIM2_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(TIM2_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(TIM2_IRQn);
+  /* TIM3_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(TIM3_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(TIM3_IRQn);
+}
+
 /* USER CODE BEGIN 4 */
+
+/*void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	moter.step_l ++;
+}*/
 
 /* USER CODE END 4 */
 

@@ -38,15 +38,9 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
-#include "stm32f1xx_hal.h"
-#include "adc.h"
-#include "tim.h"
 #include "usart.h"
+
 #include "gpio.h"
-#include "led.h"
-#include "motion.h"
-#include "mode.h"
 
 /* USER CODE BEGIN 0 */
 

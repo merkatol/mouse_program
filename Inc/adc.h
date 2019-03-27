@@ -52,6 +52,7 @@
 /* USER CODE END Includes */
 
 extern ADC_HandleTypeDef hadc1;
+extern ADC_HandleTypeDef hadc2;
 
 /* USER CODE BEGIN Private defines */
 
@@ -60,9 +61,14 @@ extern ADC_HandleTypeDef hadc1;
 extern void _Error_Handler(char *, int);
 
 void MX_ADC1_Init(void);
+void MX_ADC2_Init(void);
 
 /* USER CODE BEGIN Prototypes */
 
+uint16_t ADC_FL(void);
+uint16_t ADC_SL(void);
+uint16_t ADC_SR(void);
+uint16_t ADC_FR(void);
 void ADC_UPDATE(void);
 
 /* USER CODE END Prototypes */

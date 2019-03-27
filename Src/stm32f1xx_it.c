@@ -37,15 +37,17 @@
 
 /* USER CODE BEGIN 0 */
 
-ADC_HandleTypeDef hadc1;
-uint16_t adc1_ch10 = 10;
-uint16_t adc1_ch11 = 10;
-uint16_t adc1_ch12 = 10;
-uint16_t adc1_ch13 = 10;
+#include "adc.h"
+#include "global.h"
+
+static int L_Flag = 0;
+static int R_Flag = 0;
 
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim3;
 
 /******************************************************************************/
 /*            Cortex-M3 Processor Interruption and Exception Handlers         */ 
@@ -187,45 +189,7 @@ void SysTick_Handler(void)
   HAL_SYSTICK_IRQHandler();
   /* USER CODE BEGIN SysTick_IRQn 1 */
 
-	ADC_ChannelConfTypeDef sConfig;
-
-	sConfig.Rank = ADC_REGULAR_RANK_1;
-	sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
-	sConfig.Channel = ADC_CHANNEL_10;
-	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-	HAL_ADC_Start(&hadc1);
-	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
-	adc1_ch10 = HAL_ADC_GetValue(&hadc1);
-	HAL_ADC_Stop(&hadc1);
-
-	sConfig.Rank = ADC_REGULAR_RANK_2;
-	sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
-	sConfig.Channel = ADC_CHANNEL_11;
-	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-	HAL_ADC_Start(&hadc1);
-	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
-	adc1_ch11 = HAL_ADC_GetValue(&hadc1);
-	HAL_ADC_Stop(&hadc1);
-
-	sConfig.Rank = ADC_REGULAR_RANK_3;
-	sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
-	sConfig.Channel = ADC_CHANNEL_12;
-	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-	HAL_ADC_Start(&hadc1);
-	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
-	adc1_ch12 = HAL_ADC_GetValue(&hadc1);
-	HAL_ADC_Stop(&hadc1);
-
-	sConfig.Rank = ADC_REGULAR_RANK_4;
-	sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
-	sConfig.Channel = ADC_CHANNEL_13;
-	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
-	HAL_ADC_Start(&hadc1);
-	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
-	adc1_ch13 = HAL_ADC_GetValue(&hadc1);
-	HAL_ADC_Stop(&hadc1);
-
-	printf(" %d %d %d %d\r",adc1_ch10,adc1_ch11,adc1_ch12,adc1_ch13);
+  ADC_UPDATE();
 
   /* USER CODE END SysTick_IRQn 1 */
 }
@@ -236,6 +200,58 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32f1xx.s).                    */
 /******************************************************************************/
+
+/**
+* @brief This function handles TIM2 global interrupt.
+*/
+void TIM2_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM2_IRQn 0 */
+
+  /* USER CODE END TIM2_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim2);
+  /* USER CODE BEGIN TIM2_IRQn 1 */
+
+  if( L_Flag == 0 )
+  {
+	  L_Flag = 1;
+	  //HAL_GPIO_WritePin(L_CW_CCW_GPIO_Port,L_CW_CCW_Pin,GPIO_PIN_SET);
+	  moter.step_l ++;
+  }
+  else
+  {
+	  L_Flag = 0;
+	  //HAL_GPIO_WritePin(L_CW_CCW_GPIO_Port,L_CW_CCW_Pin,GPIO_PIN_RESET);
+  }
+
+  /* USER CODE END TIM2_IRQn 1 */
+}
+
+/**
+* @brief This function handles TIM3 global interrupt.
+*/
+void TIM3_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM3_IRQn 0 */
+
+  /* USER CODE END TIM3_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim3);
+  /* USER CODE BEGIN TIM3_IRQn 1 */
+
+  if( R_Flag == 0 )
+  {
+	  R_Flag = 1;
+	  //HAL_GPIO_WritePin(R_CW_CCW_GPIO_Port,R_CW_CCW_Pin,GPIO_PIN_SET);
+	  moter.step_l ++;
+  }
+  else
+  {
+	  R_Flag = 0;
+	  //HAL_GPIO_WritePin(R_CW_CCW_GPIO_Port,R_CW_CCW_Pin,GPIO_PIN_RESET);
+  }
+
+  /* USER CODE END TIM3_IRQn 1 */
+}
 
 /* USER CODE BEGIN 1 */
 

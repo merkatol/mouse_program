@@ -38,17 +38,7 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
-#include "stm32f1xx_hal.h"
-#include "adc.h"
-#include "tim.h"
-#include "usart.h"
 #include "gpio.h"
-#include "led.h"
-#include "motion.h"
-#include "mode.h"
-#include "global.h"
-
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
@@ -81,7 +71,7 @@ void MX_GPIO_Init(void)
                           |R_CW_CCW_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED3_Pin|LED4_Pin|BATTERY_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED3_Pin|LED4_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, SENSOR1_Pin|SENSOR2_Pin|SENSOR3_Pin|SENSOR4_Pin, GPIO_PIN_RESET);
@@ -95,8 +85,8 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PAPin PAPin PAPin */
-  GPIO_InitStruct.Pin = LED3_Pin|LED4_Pin|BATTERY_Pin;
+  /*Configure GPIO pins : PAPin PAPin */
+  GPIO_InitStruct.Pin = LED3_Pin|LED4_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

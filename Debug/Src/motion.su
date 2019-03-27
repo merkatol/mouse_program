@@ -1,7 +1,6 @@
 motion.c:21:6:MOTION_ENABLE	8	static
 motion.c:53:6:MOTION_DISABLE	8	static
-motion.c:99:6:MOTION_PRES_RESET	8	static
-motion.c:114:6:MOTION_STRAIGHT	16	static
-motion.c:148:6:MOTION_TURN_RIGHT	8	static
-motion.c:170:6:MOTION_TURN_LEFT	8	static
-motion.c:192:6:MOTION_U_TURN	8	static
+motion.c:98:6:MOTION_STRAIGHT	8	static
+motion.c:138:6:MOTION_TURN_RIGHT	8	static
+motion.c:159:6:MOTION_TURN_LEFT	8	static
+motion.c:180:6:MOTION_U_TURN	8	static

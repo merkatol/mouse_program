@@ -19,9 +19,9 @@
 							<option id="com.atollic.truestudio.toolchain_options.mcu.217731571" name="Microcontroller" superClass="com.atollic.truestudio.toolchain_options.mcu" useByScannerDiscovery="false" value="STM32F103RE" valueType="string" />
 							<option id="com.atollic.truestudio.toolchain_options.vendor.1726547906" name="Vendor name" superClass="com.atollic.truestudio.toolchain_options.vendor" useByScannerDiscovery="false" value="STMicroelectronics" valueType="string" />
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.atollic.truestudio.exe.debug.toolchain.platform.1847709431" isAbstract="false" name="Debug platform" osList="all" superClass="com.atollic.truestudio.exe.debug.toolchain.platform" />
-							<builder buildPath="${workspace_loc:/cubemx_mouse}/Debug" customBuilderProperties="toolChainpathString=C:\\Program Files (x86)\\Atollic\\TrueSTUDIO for STM32 9.0.1\\ARMTools\\bin|toolChainpathType=1|" id="com.atollic.truestudio.mbs.builder1.11517059" keepEnvironmentInBuildfile="false" name="CDT Internal Builder" superClass="com.atollic.truestudio.mbs.builder1" />
+							<builder buildPath="${workspace_loc:/cubemx_mouse}/Debug" customBuilderProperties="toolChainpathType=1|toolChainpathString=C:\\Program Files (x86)\\Atollic\\TrueSTUDIO for STM32 9.0.1\\ARMTools\\bin|" id="com.atollic.truestudio.mbs.builder1.11517059" keepEnvironmentInBuildfile="false" name="CDT Internal Builder" superClass="com.atollic.truestudio.mbs.builder1" />
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.as.117446129" name="Assembler" superClass="com.atollic.truestudio.exe.debug.toolchain.as">
-								<option id="com.atollic.truestudio.as.general.incpath.1765753719" name="Include path" superClass="com.atollic.truestudio.as.general.incpath" useByScannerDiscovery="false" valueType="includePath" />
+								<option id="com.atollic.truestudio.as.general.incpath.1765753719" name="Include path" superClass="com.atollic.truestudio.as.general.incpath" useByScannerDiscovery="false" />
 								<option id="com.atollic.truestudio.common_options.target.mcpu.1874060876" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" useByScannerDiscovery="false" value="STM32F103RE" valueType="enumerated" />
 								<option id="com.atollic.truestudio.common_options.target.instr_set.1629600046" name="Instruction set" superClass="com.atollic.truestudio.common_options.target.instr_set" useByScannerDiscovery="false" value="com.atollic.truestudio.common_options.target.instr_set.thumb2" valueType="enumerated" />
 								<option id="com.atollic.truestudio.common_options.target.fpu.844848214" name="Floating point" superClass="com.atollic.truestudio.common_options.target.fpu" useByScannerDiscovery="false" value="com.atollic.truestudio.common_options.target.fpu.soft" valueType="enumerated" />
@@ -56,10 +56,10 @@
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.ld.255761620" name="C Linker" superClass="com.atollic.truestudio.exe.debug.toolchain.ld">
 								<option id="com.atollic.truestudio.ld.general.scriptfile.1215842774" name="Linker script" superClass="com.atollic.truestudio.ld.general.scriptfile" useByScannerDiscovery="false" value="../STM32F103RETx_FLASH.ld" valueType="string" />
 								<option id="com.atollic.truestudio.ld.optimization.do_garbage.1389411996" name="Dead code removal " superClass="com.atollic.truestudio.ld.optimization.do_garbage" useByScannerDiscovery="false" value="true" valueType="boolean" />
-								<option id="com.atollic.truestudio.ld.libraries.list.1988283394" name="Libraries" superClass="com.atollic.truestudio.ld.libraries.list" useByScannerDiscovery="false" valueType="libs" />
-								<option id="com.atollic.truestudio.ld.libraries.searchpath.1914755569" name="Library search path" superClass="com.atollic.truestudio.ld.libraries.searchpath" useByScannerDiscovery="false" valueType="libPaths" />
+								<option id="com.atollic.truestudio.ld.libraries.list.1988283394" name="Libraries" superClass="com.atollic.truestudio.ld.libraries.list" useByScannerDiscovery="false" />
+								<option id="com.atollic.truestudio.ld.libraries.searchpath.1914755569" name="Library search path" superClass="com.atollic.truestudio.ld.libraries.searchpath" useByScannerDiscovery="false" />
 								<option id="com.atollic.truestudio.ld.general.syscall_lib.1446618913" name="System calls" superClass="com.atollic.truestudio.ld.general.syscall_lib" useByScannerDiscovery="false" value="com.atollic.truestudio.ld.general.syscalls_lib.nosys" valueType="enumerated" />
-								<option id="com.atollic.truestudio.ld.misc.linkerflags.217454494" name="Other options" superClass="com.atollic.truestudio.ld.misc.linkerflags" useByScannerDiscovery="false" value=" " valueType="string" />
+								<option id="com.atollic.truestudio.ld.misc.linkerflags.217454494" name="Other options" superClass="com.atollic.truestudio.ld.misc.linkerflags" useByScannerDiscovery="false" value=" -u_printf_float" valueType="string" />
 								<option id="com.atollic.truestudio.common_options.target.mcpu.1954217435" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" useByScannerDiscovery="false" value="STM32F103RE" valueType="enumerated" />
 								<option id="com.atollic.truestudio.common_options.target.instr_set.1234160211" name="Instruction set" superClass="com.atollic.truestudio.common_options.target.instr_set" useByScannerDiscovery="false" value="com.atollic.truestudio.common_options.target.instr_set.thumb2" valueType="enumerated" />
 								<option id="com.atollic.truestudio.common_options.target.fpu.2030567668" name="Floating point" superClass="com.atollic.truestudio.common_options.target.fpu" useByScannerDiscovery="false" value="com.atollic.truestudio.common_options.target.fpu.soft" valueType="enumerated" />
@@ -97,8 +97,8 @@
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.ldcc.2113065082" name="C++ Linker" superClass="com.atollic.truestudio.exe.debug.toolchain.ldcc">
 								<option id="com.atollic.truestudio.ldcc.general.scriptfile.1463504085" name="Linker script" superClass="com.atollic.truestudio.ldcc.general.scriptfile" value="../STM32F103RETx_FLASH.ld" valueType="string" />
 								<option id="com.atollic.truestudio.ldcc.optimization.do_garbage.1466541394" name="Dead code removal" superClass="com.atollic.truestudio.ldcc.optimization.do_garbage" value="true" valueType="boolean" />
-								<option id="com.atollic.truestudio.ldcc.libraries.list.1489756887" name="Libraries" superClass="com.atollic.truestudio.ldcc.libraries.list" valueType="libs" />
-								<option id="com.atollic.truestudio.ldcc.libraries.searchpath.345017896" name="Library search path" superClass="com.atollic.truestudio.ldcc.libraries.searchpath" valueType="libPaths" />
+								<option id="com.atollic.truestudio.ldcc.libraries.list.1489756887" name="Libraries" superClass="com.atollic.truestudio.ldcc.libraries.list" />
+								<option id="com.atollic.truestudio.ldcc.libraries.searchpath.345017896" name="Library search path" superClass="com.atollic.truestudio.ldcc.libraries.searchpath" />
 								<option id="com.atollic.truestudio.common_options.target.mcpu.1670479914" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="STM32F103RE" valueType="enumerated" />
 								<option id="com.atollic.truestudio.common_options.target.instr_set.1507093103" name="Instruction set" superClass="com.atollic.truestudio.common_options.target.instr_set" value="com.atollic.truestudio.common_options.target.instr_set.thumb2" valueType="enumerated" />
 								<option id="com.atollic.truestudio.common_options.target.fpu.1165711867" name="Floating point" superClass="com.atollic.truestudio.common_options.target.fpu" value="com.atollic.truestudio.common_options.target.fpu.soft" valueType="enumerated" />
@@ -106,7 +106,7 @@
 							</tool>
 							<tool id="com.atollic.truestudio.ar.base.1138740964" name="Archiver" superClass="com.atollic.truestudio.ar.base" />
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.secoutput.1337315449" name="Other" superClass="com.atollic.truestudio.exe.debug.toolchain.secoutput">
-								<option id="com.atollic.truestudio.secoutput.general.convert.792640824" superClass="com.atollic.truestudio.secoutput.general.convert" useByScannerDiscovery="false" value="true" valueType="boolean" />
+								<option id="com.atollic.truestudio.secoutput.general.convert.792640824" name="Convert build output" superClass="com.atollic.truestudio.secoutput.general.convert" useByScannerDiscovery="false" value="true" valueType="boolean" />
 							</tool>
 						</toolChain>
 					</folderInfo>
@@ -140,7 +140,7 @@
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.atollic.truestudio.exe.release.toolchain.platform.838270180" isAbstract="false" name="release platform" superClass="com.atollic.truestudio.exe.release.toolchain.platform" />
 							<builder buildPath="${workspace_loc:/cubemx_mouse}/Release" id="com.atollic.truestudio.mbs.builder1.1773603628" keepEnvironmentInBuildfile="false" name="CDT Internal Builder" superClass="com.atollic.truestudio.mbs.builder1" />
 							<tool id="com.atollic.truestudio.exe.release.toolchain.as.543314189" name="Assembler" superClass="com.atollic.truestudio.exe.release.toolchain.as">
-								<option id="com.atollic.truestudio.common_options.target.fpucore.767791401" superClass="com.atollic.truestudio.common_options.target.fpucore" value="com.atollic.truestudio.common_options.target.fpucore.None" valueType="enumerated" />
+								<option id="com.atollic.truestudio.common_options.target.fpucore.767791401" name="FPU" superClass="com.atollic.truestudio.common_options.target.fpucore" value="com.atollic.truestudio.common_options.target.fpucore.None" valueType="enumerated" />
 								<inputType id="com.atollic.truestudio.as.input.1005804778" name="Input" superClass="com.atollic.truestudio.as.input" />
 							</tool>
 							<tool id="com.atollic.truestudio.exe.release.toolchain.gcc.579041887" name="C Compiler" superClass="com.atollic.truestudio.exe.release.toolchain.gcc">
@@ -171,8 +171,8 @@
 							<tool id="com.atollic.truestudio.exe.release.toolchain.ld.1117224940" name="C Linker" superClass="com.atollic.truestudio.exe.release.toolchain.ld">
 								<option id="com.atollic.truestudio.ld.general.scriptfile.1202986662" name="Linker script" superClass="com.atollic.truestudio.ld.general.scriptfile" value="../STM32F103RETx_FLASH.ld" valueType="string" />
 								<option id="com.atollic.truestudio.ld.optimization.do_garbage.1059766211" name="Dead code removal " superClass="com.atollic.truestudio.ld.optimization.do_garbage" value="true" valueType="boolean" />
-								<option id="com.atollic.truestudio.ld.libraries.list.2002437325" name="Libraries" superClass="com.atollic.truestudio.ld.libraries.list" valueType="libs" />
-								<option id="com.atollic.truestudio.ld.libraries.searchpath.379496569" name="Library search path" superClass="com.atollic.truestudio.ld.libraries.searchpath" valueType="libPaths" />
+								<option id="com.atollic.truestudio.ld.libraries.list.2002437325" name="Libraries" superClass="com.atollic.truestudio.ld.libraries.list" />
+								<option id="com.atollic.truestudio.ld.libraries.searchpath.379496569" name="Library search path" superClass="com.atollic.truestudio.ld.libraries.searchpath" />
 								<option id="com.atollic.truestudio.ld.general.syscall_lib.16755492" name="System calls" superClass="com.atollic.truestudio.ld.general.syscall_lib" value="com.atollic.truestudio.ld.general.syscalls_lib.nosys" valueType="enumerated" />
 								<option id="com.atollic.truestudio.ld.misc.linkerflags.739321431" name="Other options" superClass="com.atollic.truestudio.ld.misc.linkerflags" value=" " valueType="string" />
 								<option id="com.atollic.truestudio.common_options.target.mcpu.300976387" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="STM32F103RE" valueType="enumerated" />
@@ -206,8 +206,8 @@
 							<tool id="com.atollic.truestudio.exe.release.toolchain.ldcc.980100490" name="C++ Linker" superClass="com.atollic.truestudio.exe.release.toolchain.ldcc">
 								<option id="com.atollic.truestudio.ldcc.general.scriptfile.1638351568" name="Linker script" superClass="com.atollic.truestudio.ldcc.general.scriptfile" value="../STM32F103RETx_FLASH.ld" valueType="string" />
 								<option id="com.atollic.truestudio.ldcc.optimization.do_garbage.908139604" name="Dead code removal" superClass="com.atollic.truestudio.ldcc.optimization.do_garbage" value="true" valueType="boolean" />
-								<option id="com.atollic.truestudio.ldcc.libraries.list.415000109" name="Libraries" superClass="com.atollic.truestudio.ldcc.libraries.list" valueType="libs" />
-								<option id="com.atollic.truestudio.ldcc.libraries.searchpath.925155143" name="Library search path" superClass="com.atollic.truestudio.ldcc.libraries.searchpath" valueType="libPaths" />
+								<option id="com.atollic.truestudio.ldcc.libraries.list.415000109" name="Libraries" superClass="com.atollic.truestudio.ldcc.libraries.list" />
+								<option id="com.atollic.truestudio.ldcc.libraries.searchpath.925155143" name="Library search path" superClass="com.atollic.truestudio.ldcc.libraries.searchpath" />
 								<option id="com.atollic.truestudio.ldcc.misc.linkerflags.1697665892" name="Other options" superClass="com.atollic.truestudio.ldcc.misc.linkerflags" value="-specs=nosys.specs -specs=nano.specs" valueType="string" />
 								<option id="com.atollic.truestudio.common_options.target.mcpu.1934408343" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" value="STM32F103RE" valueType="enumerated" />
 								<option id="com.atollic.truestudio.common_options.target.instr_set.2024544789" name="Instruction set" superClass="com.atollic.truestudio.common_options.target.instr_set" value="com.atollic.truestudio.common_options.target.instr_set.thumb2" valueType="enumerated" />
