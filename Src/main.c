@@ -50,6 +50,7 @@
 #include "motion.h"
 #include "mode.h"
 #include "global.h"
+#include "control.h"
 #include <stdint.h>
 
 /* USER CODE END Includes */
@@ -126,6 +127,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_Base_Start_IT(&htim3);
   setbuf(stdout, NULL);
 
   /* USER CODE END 2 */

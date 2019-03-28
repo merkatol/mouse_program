@@ -39,6 +39,7 @@
 
 #include "adc.h"
 #include "global.h"
+#include "control.h"
 
 static int L_Flag = 0;
 static int R_Flag = 0;
@@ -190,6 +191,7 @@ void SysTick_Handler(void)
   /* USER CODE BEGIN SysTick_IRQn 1 */
 
   ADC_UPDATE();
+  CONTROL_P_CACL();
 
   /* USER CODE END SysTick_IRQn 1 */
 }

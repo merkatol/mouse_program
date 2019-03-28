@@ -39,6 +39,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "adc.h"
+
 #include "gpio.h"
 
 /* USER CODE BEGIN 0 */
@@ -51,6 +52,11 @@ ADC_HandleTypeDef hadc1;
 
 ADC_HandleTypeDef hadc1;
 ADC_HandleTypeDef hadc2;
+
+uint16_t fl_value = 0;
+uint16_t sl_value = 0;
+uint16_t sr_value = 0;
+uint16_t fr_value = 0;
 
 /* ADC1 init function */
 void MX_ADC1_Init(void)
@@ -75,7 +81,7 @@ void MX_ADC1_Init(void)
     */
   sConfig.Channel = ADC_CHANNEL_10;
   sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
+  sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     _Error_Handler(__FILE__, __LINE__);
@@ -206,16 +212,16 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* adcHandle)
 
 uint16_t ADC_FL(void)
 {
-	uint16_t fl_value = 0;
 	ADC_ChannelConfTypeDef sConfig;
 
 	HAL_GPIO_WritePin(SENSOR4_GPIO_Port,SENSOR4_Pin,GPIO_PIN_SET);
 	sConfig.Rank = ADC_REGULAR_RANK_1;
-	sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
+	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
 	sConfig.Channel = ADC_CHANNEL_13;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+	HAL_ADCEx_Calibration_Start(&hadc1);
 	HAL_ADC_Start(&hadc1);
-	while( HAL_ADC_PollForConversion(&hadc1,100) != HAL_OK );
+	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
 	fl_value = HAL_ADC_GetValue(&hadc1);
 	HAL_ADC_Stop(&hadc1);
 	HAL_GPIO_WritePin(SENSOR4_GPIO_Port,SENSOR4_Pin,GPIO_PIN_RESET);
@@ -225,16 +231,16 @@ uint16_t ADC_FL(void)
 
 uint16_t ADC_SL(void)
 {
-	uint16_t sl_value = 0;
 	ADC_ChannelConfTypeDef sConfig;
 
 	HAL_GPIO_WritePin(SENSOR3_GPIO_Port,SENSOR3_Pin,GPIO_PIN_SET);
 	sConfig.Rank = ADC_REGULAR_RANK_1;
-	sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
+	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
 	sConfig.Channel = ADC_CHANNEL_12;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+	HAL_ADCEx_Calibration_Start(&hadc1);
 	HAL_ADC_Start(&hadc1);
-	while( HAL_ADC_PollForConversion(&hadc1,100) != HAL_OK );
+	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
 	sl_value = HAL_ADC_GetValue(&hadc1);
 	HAL_ADC_Stop(&hadc1);
 	HAL_GPIO_WritePin(SENSOR3_GPIO_Port,SENSOR3_Pin,GPIO_PIN_RESET);
@@ -244,16 +250,16 @@ uint16_t ADC_SL(void)
 
 uint16_t ADC_SR(void)
 {
-	uint16_t sr_value = 0;
 	ADC_ChannelConfTypeDef sConfig;
 
 	HAL_GPIO_WritePin(SENSOR2_GPIO_Port,SENSOR2_Pin,GPIO_PIN_SET);
 	sConfig.Rank = ADC_REGULAR_RANK_1;
-	sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
+	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
 	sConfig.Channel = ADC_CHANNEL_11;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+	HAL_ADCEx_Calibration_Start(&hadc1);
 	HAL_ADC_Start(&hadc1);
-	while( HAL_ADC_PollForConversion(&hadc1,100) != HAL_OK );
+	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
 	sr_value = HAL_ADC_GetValue(&hadc1);
 	HAL_ADC_Stop(&hadc1);
 	HAL_GPIO_WritePin(SENSOR2_GPIO_Port,SENSOR2_Pin,GPIO_PIN_RESET);
@@ -263,16 +269,16 @@ uint16_t ADC_SR(void)
 
 uint16_t ADC_FR(void)
 {
-	uint16_t fr_value = 0;
 	ADC_ChannelConfTypeDef sConfig;
 
 	HAL_GPIO_WritePin(SENSOR1_GPIO_Port,SENSOR1_Pin,GPIO_PIN_SET);
 	sConfig.Rank = ADC_REGULAR_RANK_1;
-	sConfig.SamplingTime = ADC_SAMPLETIME_55CYCLES_5;
+	sConfig.SamplingTime = ADC_SAMPLETIME_71CYCLES_5;
 	sConfig.Channel = ADC_CHANNEL_10;
 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+	HAL_ADCEx_Calibration_Start(&hadc1);
 	HAL_ADC_Start(&hadc1);
-	while( HAL_ADC_PollForConversion(&hadc1,100) != HAL_OK );
+	while( HAL_ADC_PollForConversion(&hadc1,1000) != HAL_OK );
 	fr_value = HAL_ADC_GetValue(&hadc1);
 	HAL_ADC_Stop(&hadc1);
 	HAL_GPIO_WritePin(SENSOR1_GPIO_Port,SENSOR1_Pin,GPIO_PIN_RESET);

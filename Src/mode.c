@@ -68,7 +68,12 @@ void MODE_RUN(int8_t mode)
 	case 0:
 		HAL_Delay(1000);
 		MOTION_ENABLE();
-		MOTION_STRAIGHT( 6400 , 6400 );
+		control.enable = true;
+		for(int i = 0;i < 5;i ++)
+		{
+			MOTION_STRAIGHT( 6400 , 6400 );
+		}
+		control.enable = false;
 		MOTION_DISABLE();
 		HAL_Delay(1000);
 		HAL_GPIO_WritePin(MOTER_EN_GPIO_Port,MOTER_EN_Pin,GPIO_PIN_RESET);
@@ -102,7 +107,11 @@ void MODE_RUN(int8_t mode)
 		break;
 	//AD•ÏŠ·
 	case 4:
-		printf(" fl_%d , sl_%d , sr_%d , fr_%d     \r",sen_fl.value,sen_sl.value,sen_sr.value,sen_fr.value);
+		while(1)
+		{
+			if(HAL_GPIO_ReadPin(SW3_GPIO_Port,SW3_Pin) == GPIO_PIN_SET) break;
+			else printf(" fl_%d , sl_%d , sr_%d , fr_%d     \r",sen_fl.value,sen_sl.value,sen_sr.value,sen_fr.value);
+		}
 		break;
 	default:
 		break;

@@ -132,7 +132,7 @@ void MOTION_STRAIGHT(int left,int right)
 	}
 
 	moter.step_l = moter.step_r = 0;
-	while( moter.step_l + moter.step_r < 112 );
+	while( moter.step_l + moter.step_r < 224 );
 }
 
 void MOTION_TURN_RIGHT(void)
